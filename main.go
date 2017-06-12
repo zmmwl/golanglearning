@@ -1,7 +1,10 @@
 package main
 
 import "fmt"
-import d1 "github.com/zmmwl/project1/d1"
+import (
+	d1 "github.com/zmmwl/project1/d1"
+
+)
 
 func main() {
 	fmt.Println("hello Tyler");
@@ -115,13 +118,76 @@ func main() {
 	i++
 	a()
 
+	var intValue Integer = 1
+
+	fmt.Println(intValue)
+	fmt.Println(new(Integer))
+
+	var intValue2 *Integer = new(Integer)
+	*intValue2 = 2
+
+	fmt.Println("intValue is", intValue, *intValue2)
+	fmt.Println(intValue.test(2))
+
+	var rect *Rect = new(Rect)
+	fmt.Println(*&rect)
+
+	var rect2 *Rect  = &Rect{}
+	chgRect(rect2)
+	fmt.Println(rect2.y)
+
+
+	var iff IFoo = &MyFoo{1}
+	iff.Test()
+	fmt.Println(iff)
+
+	var mf *MyFoo = &MyFoo{1}
+	//var mf MyFoo = MyFoo{1}
+	fmt.Println(mf)
+	mf.Test()
+	fmt.Println(mf)
+
 	/******************* The End! ********************/
 	fmt.Println("\n")
 	fmt.Println("\n")
-	fmt.Println("\n")
+	fmt.Println("\n/******* The End! **********/")
 
 
 }
+
+
+type MyFoo struct {
+	data int
+}
+
+func (m MyFoo) Test() {
+	m.data++
+}
+
+type IFoo interface{
+	Test()
+}
+
+func chgRect(rect *Rect){
+	rect.y = 3
+}
+
+type Rect struct{
+	x,y int
+}
+func (a *Rect) Area() int{
+	return a.x * a.y
+}
+
+
+type Integer int
+
+func (a Integer)test(b Integer) bool{
+	fmt.Println(b)
+	return a > b
+}
+
+
 
 func TestNolimitFunc2(args ...interface{}){
 	fmt.Println(args)
